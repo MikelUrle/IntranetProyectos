@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import paquete.modelo.dto.Proyecto;
@@ -59,8 +60,9 @@ public class admin_añadir_proyecto extends HttpServlet implements Rutas_conexio
 			}
 		}
 		
-		// Recogemos el usuario
-		String creador = "Mikel";
+		// Tomamos en cuenta la sesion de creada para recoger el dato de "usuario" para ya despues utilizarlo como el "creador"
+		HttpSession session = request.getSession(false);
+		String creador = (String) session.getAttribute("usuario");
 		
 		// Variable para recoger el nombre del proyecto
 		String nombre = "";

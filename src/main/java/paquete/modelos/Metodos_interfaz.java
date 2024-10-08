@@ -27,6 +27,8 @@ public interface Metodos_interfaz {
 	
 	List<Usuario> obtenerTodosUsuarios(Connection con);
 	
+	String obtenerRol(Connection con, String nombre);
+	
 	List<CheckkAll> obtenerTodosCheckkAllFiltrado(Connection con, int id_usuario);
 	
 	List<Solicitudes> obtenerTodosSolicitudes(Connection con);

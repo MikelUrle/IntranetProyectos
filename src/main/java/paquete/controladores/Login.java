@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import paquete.modelo.dto.Usuario;
 import paquete.modelos.DB_Essential;
 import paquete.modelos.Rutas_conexion;
 
@@ -63,12 +65,20 @@ public class Login extends HttpServlet implements Rutas_conexion{
         //Comparar los hasheos
         if (hashedPassword.equals(contraHashDB)) {
         	
+        	// Obtenemos el rol del usuario en cuestion
+        	String rol = db.obtenerRol(con, username);
+        	
         	// Si es aceptada, crearemos la sesion con la variable del usuario que ha iniciado la sesion
     		HttpSession session= request.getSession();
     		session.setAttribute("usuario", username);
     		
-    		// Y se redirige a la ruta principal de la intranet
-    		response.sendRedirect("CargarProyectos");
+    		
+    		// Y se redirige a la ruta principal de la intranet, si es un admin el usuario ira a la administracion, si es un usuario normal a la pagina principal
+    		if (rol.equals("admin")) {
+    			response.sendRedirect("AdminProyectos");
+			} else {
+				response.sendRedirect("CargarProyectos");
+			}
     		
     		// Desconectamos la base de datos
             db.desconectar(con);

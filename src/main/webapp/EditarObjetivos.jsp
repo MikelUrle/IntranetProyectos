@@ -8,15 +8,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%-- <% --%>
-//      if (session == null || session.getAttribute("usuario") == null) {
-// 	     response.sendRedirect("LoginInicio");
-// 	     return;
-//     }
-<%-- %> --%>
-
 <%
-	
+      if (session == null || session.getAttribute("usuario") == null) {
+ 	     response.sendRedirect("LoginInicio");
+ 	     return;
+     }
+
 List<Objetivos> listaObjetivos = new ArrayList<>();
 if(request.getAttribute(Rutas_conexion.ATR_LISTA_OBJETIVOS) != null) {
 	listaObjetivos = (List<Objetivos>)request.getAttribute(Rutas_conexion.ATR_LISTA_OBJETIVOS);
@@ -26,9 +23,6 @@ if(request.getAttribute(Rutas_conexion.ATR_LISTA_OBJETIVOS) != null) {
 	out.println("No llego el atributo atr_lista_objetivos");
 }
 
-%>
-
-<%
 	
 int Id = 0;
 if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
@@ -66,10 +60,18 @@ if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
 						<a class="textoNav nav-link" href="admin_checkkall">Check-in</a>
 					</li>
 					<li class="nav-item" style="margin-left: 2vw">
-						<a class="textoNav nav-link" href="CargarProyectos">Proyectos</a>
+						<a class="textoNav nav-link" href="AdminProyectos">Proyectos</a>
 					</li>
 					<li class="nav-item" style="margin-left: 2vw">
-						<a class="textoNav nav-link" href="Solicitudes">Solicitudes</a>
+						<a class="textoNav nav-link" href="admin_solicitudes">Solicitudes</a>
+					</li>
+					<li class="nav-item" style="margin-left: 2vw">
+						<a href="deslogin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16" style="color: black">
+							  <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+							  <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+							</svg>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -81,7 +83,7 @@ if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
 <table class="styled-table" style="
     border-collapse: collapse;
     margin-top: 10vh;
-    margin-left: 22vw;
+    margin-left: 26vw;
     margin-right: 30vw;
     font-size: 1.4em;
     font-family: sans-serif;
@@ -94,9 +96,8 @@ if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
     		color: #ffffff;
     		text-align: left;
         ">
-            <th>ID</th>
             <th><p style="width: 300px; margin-top: 18px">Texto<p></th>
-            <th>Creador</th>
+            <th>Persona</th>
             <th>Prioridad</th>
              <th></th>
         </tr>
@@ -110,7 +111,6 @@ if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
 		%>
     
 		        <tr>
-		            <td><%=elemento.getId() %></td>
 		            <td><%=elemento.getTexto() %></td>
 		            <td style="text-align: center"><%=elemento.getPersona() %></td>
 		            <td style="text-align: center"><%=elemento.getPrioridad() %></td>
@@ -122,21 +122,18 @@ if(request.getAttribute(Rutas_conexion.ATR_VAR_DATO_ID_PROYECTO) != null) {
         <form method="post" action="añadirObjetivo">
 	        <tr>
 	            <td>
-	            	<p>AN</p>
-	            </td>
-	            <td>
 		           	<div class="form-floating">
-					  <textarea class="form-control" placeholder="Leave a comment here" name="texto"></textarea>
+					  <textarea class="form-control" name="texto"></textarea>
 					</div>
 	            </td>
 	            <td>
 		            <div class="form-floating">
-					  <textarea class="form-control" placeholder="Leave a comment here" name="persona"></textarea>
+					  <textarea class="form-control" name="persona"></textarea>
 					</div>
 	            </td>
 	            <td>
 		            <div class="form-floating">
-					  <textarea class="form-control" placeholder="Leave a comment here" name="prioridad"></textarea>
+					  <textarea class="form-control" name="prioridad"></textarea>
 					</div>
 	            </td>
 	            <td style="text-align: center">

@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="styles/style.css">
 </head>
 <body style="
-	background-image: url('images/FondoVerde.png');
+	background-image: url('images/FondoVerde.jpg');
 	  background-size: cover;
 	  background-position: center;
 	  background-repeat: no-repeat;
@@ -52,7 +52,7 @@
 			    <input type="password" class="form-control" id="validationCustom02" name="contra" value="" required>
 			  </div>
 			  <div class="col-12">
-			    <button class="btn btn-primary" type="submit">Entrar</button>
+			    <button class="btn btn-success" type="submit">Entrar</button>
 			  </div>
 			</form>
 	     

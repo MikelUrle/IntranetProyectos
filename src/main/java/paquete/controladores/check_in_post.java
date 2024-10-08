@@ -58,7 +58,7 @@ public class check_in_post extends HttpServlet implements Rutas_conexion{
 		}
 		
 		// Llamamos a la funcion que tenemos en DB_Essential de "insertarCheckk_in" pasandole la conexion, el usuario y el texto
-		int resultadoInsertPedido=db.insertarCheckk_in(con, usuario, texto);
+		db.insertarCheckk_in(con, usuario, texto);
 		
 		// Lo mismo para "cambiarEstado" pasandole la conexion y el usuario
 		db.cambiarEstado(con, usuario);

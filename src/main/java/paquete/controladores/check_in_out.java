@@ -44,7 +44,7 @@ public class check_in_out extends HttpServlet {
 		}
 		
 		// Llamamos a la funcion que tenemos en DB_Essential de "modificarCheckk_out" pasandole la conexion y el parametro de usuario
-		int resultadoModificar=db.modificarCheckk_out(con, usuario);
+		db.modificarCheckk_out(con, usuario);
 		
 		// Llamamos a la funcion de la base de datos "cambiarEstado0" pasandole la conexion y el usuario
 		db.cambiarEstado0(con, usuario);

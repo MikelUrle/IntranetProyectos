@@ -93,6 +93,7 @@ public interface Rutas_conexion {
 	String SP_CHECKK_OUT = "call intranet.check_out_total(?);";
 	String SP_OBTENER_CONTRASEÑA = "call intranet.conseguir_contraseña(?);";
 	String SP_INSERTAR_SOLICITUD = "call intranet.InsertarSolicitud(?, ?, ?, ?);";
+	String SP_OBTENER_ROL ="call intranet.obtener_rol_por_nombre(?);";
 	
 	// Zona Admin (Stored Procedures)
 	

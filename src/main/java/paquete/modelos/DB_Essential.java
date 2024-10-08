@@ -518,6 +518,48 @@ public class DB_Essential implements Metodos_interfaz, Rutas_conexion{
 		
 	}
 	
+	// Funcion para obtener el rol de un usuario
+	@Override
+	public String obtenerRol(Connection con, String nombre) {
+		   
+		String rol = null;
+		
+		try {
+			CallableStatement cStmt = con.prepareCall(SP_OBTENER_ROL);
+			
+			// Con el nombre del usuario, preparamos la stored procedure
+			cStmt.setString(1, nombre);
+			// Y la ejecutamos
+			boolean tieneSlect = cStmt.execute();
+			
+			if (tieneSlect == true) {
+			
+				ResultSet rs = cStmt.getResultSet();
+				
+			    if (rs.next()) {
+			        rol = rs.getString("rol");
+			    }
+				
+				return rol;
+				
+			} else {
+
+				System.out.println("No se obtubo una Lista de solicitudes");
+				System.out.println("El stored procedure no tiene un RESULTSET");
+				return rol;
+			}
+			
+		} catch (SQLException e) {
+
+			System.out.println("ERROR DE DB: CONSULTA");
+			System.out.println("Error al obtener la lista de todos los solicitudes");
+			System.out.println(e.getMessage());
+			
+			return rol;
+		}
+		
+	}
+	
 	// Funcion para borrar una solicitud
 	@Override
 	public void borrarSolicitud(Connection con, int idSolicitud) {
